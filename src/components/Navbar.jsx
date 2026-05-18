@@ -40,9 +40,9 @@ const Navbar = () => {
       <li>
         <Link
           className={
-            usePathname === "/bookings" ? "bg-[#244D3F] text-white" : ""
+            usePathname === "/add-room" ? "bg-[#244D3F] text-white" : ""
           }
-          href="/add-destination"
+          href="/add-room"
         >
           Add Room
         </Link>
