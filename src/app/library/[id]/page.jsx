@@ -1,12 +1,8 @@
 
-
-
-// import { DeleteDestination } from "@/components/DeleteDestination";
-// import { EditModal } from "@/components/EditModal";
-// import { auth } from "@/lib/auth";
 // import { ArrowRight } from "@gravity-ui/icons";
 import BookingRoomCard from "@/components/BookingRoomCard";
 import { DeleteDestination } from "@/components/DeleteDestination";
+import { EditModal } from "@/components/EditModal";
 import { auth } from "@/lib/auth";
 
 import { Button, Card, Input } from "@heroui/react";
@@ -32,13 +28,13 @@ const RoomsDetailsPage = async ({ params }) => {
 //   }
 );
   const roomDetails = await res.json();
-//   console.log(roomDetails)
+  // console.log(roomDetails)
 
   const user = roomDetails.user
 
   const session = await auth.api.getSession({headers: await headers()});
 
-    console.log(session.session.userId)
+    // console.log(session.session.userId)
 
     const crantuserId = session.session.userId
 
@@ -46,7 +42,9 @@ const RoomsDetailsPage = async ({ params }) => {
     <div className="">
       <div className=" max-w-7xl mx-auto my-15">
         <div className="mb-4 flex justify-end items-center gap-5">
-          {/* <EditModal roomDetails={roomDetails}></EditModal> */}
+          {
+            user === crantuserId && <EditModal roomDetails={roomDetails}></EditModal>
+          }
           {
             user=== crantuserId && <DeleteDestination roomDetails={roomDetails}></DeleteDestination>
           }
