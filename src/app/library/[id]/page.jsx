@@ -1,7 +1,7 @@
 
 // import { ArrowRight } from "@gravity-ui/icons";
 import BookingRoomCard from "@/components/BookingRoomCard";
-import { DeleteDestination } from "@/components/DeleteDestination";
+import { DeleteRoom } from "@/components/DeleteRoom";
 import { EditModal } from "@/components/EditModal";
 import { auth } from "@/lib/auth";
 
@@ -40,17 +40,10 @@ const RoomsDetailsPage = async ({ params }) => {
 
   return (
     <div className="">
-      <div className=" max-w-7xl mx-auto my-15">
-        <div className="mb-4 flex justify-end items-center gap-5">
-          {
-            user === crantuserId && <EditModal roomDetails={roomDetails}></EditModal>
-          }
-          {
-            user=== crantuserId && <DeleteDestination roomDetails={roomDetails}></DeleteDestination>
-          }
-        </div>
+      <div className=" max-w-6xl mx-auto my-10">
+        
 
-        <div className="relative w-full h-150">
+        <div className="relative w-full h-120">
           <Image
             alt={roomDetails.roomName}
             src={roomDetails.image}
@@ -60,7 +53,7 @@ const RoomsDetailsPage = async ({ params }) => {
         </div>
 
         <div className="flex justify-between ">
-          <div className="space-y-10 my-10">
+          <div className="space-y-10 my-6">
             <div className="space-y-2">
               <h3 className="flex items-center text-2xl">
                 <MdLocationOn></MdLocationOn>
@@ -84,11 +77,22 @@ const RoomsDetailsPage = async ({ params }) => {
 
               
             </div>
+
+            <div className="mb-4 flex items-center gap-5">
+          {
+            user === crantuserId && <EditModal roomDetails={roomDetails}></EditModal>
+          }
+          {
+            user=== crantuserId && <DeleteRoom roomDetails={roomDetails}></DeleteRoom>
+          }
+        </div>
           </div>
 
          <BookingRoomCard roomDetails={roomDetails}></BookingRoomCard>
 
         </div>
+
+        
       </div>
     </div>
   );

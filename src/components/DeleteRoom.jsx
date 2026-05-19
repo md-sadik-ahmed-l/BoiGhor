@@ -3,16 +3,17 @@
 import { authClient } from "@/lib/auth-client";
 import { TrashBin } from "@gravity-ui/icons";
 import { AlertDialog, Button } from "@heroui/react";
+import { useRouter } from "next/navigation";
 // import { revalidatePath } from "next/cache";
 
-export function DeleteDestination({ roomDetails }) {
+export function DeleteRoom({ roomDetails }) {
 
     
-
-  const { _id, user, destinationName } = roomDetails;
+  const router = useRouter();
+  const { _id, user, roomName } = roomDetails;
   console.log(user)
   const handleDelete = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${_id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${_id}`, {
       method: "DELETE",
       headers: {
         "contain-type": "application/json",
@@ -21,10 +22,10 @@ export function DeleteDestination({ roomDetails }) {
 
     const data = await res.json();
 
-    // if (data.deletedCount > 0) {
-    //   revalidatePath("/destinations");
-    // }
-    // return data;
+    if (data.deletedCount > 0) {
+     router.push("/library");
+    }
+    return data;
   };
 
   return (
@@ -46,7 +47,7 @@ export function DeleteDestination({ roomDetails }) {
               <AlertDialog.Heading>Delete this item?</AlertDialog.Heading>
             </AlertDialog.Header>
             <AlertDialog.Body>
-              <p>{destinationName} is permanent deleted?</p>
+              <p>{roomName} is permanent deleted?</p>
             </AlertDialog.Body>
             <AlertDialog.Footer>
               <Button slot="close" variant="tertiary">

@@ -97,15 +97,15 @@ export function EditModal({ roomDetails }) {
     <>
       {/* Modal */}
       <Modal state={state}>
-        {/* Open Button */}
+        
         <Modal.Trigger className="flex justify-end">
-          <Button className="rounded-xl px-6">
+          <Button className="rounded-none px-4 py-[30px]">
             <Pencil className="w-4 h-4" />
             Edit Room
           </Button>
         </Modal.Trigger>
 
-        <Modal.Backdrop />
+        <Modal.Backdrop >
 
         <Modal.Container placement="center">
           <Modal.Dialog className="w-full max-w-4xl bg-[#1f1f1f] text-white border border-gray-700 rounded-3xl">
@@ -129,9 +129,9 @@ export function EditModal({ roomDetails }) {
                   onSubmit={onSubmit}
                   className="space-y-4"
                 >
-                  {/* Grid */}
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Room Name */}
+                   
                     <TextField
                       name="roomName"
                       defaultValue={roomName}
@@ -149,7 +149,7 @@ export function EditModal({ roomDetails }) {
                       <FieldError />
                     </TextField>
 
-                    {/* Floor */}
+                    
                     <TextField
                       name="floor"
                       defaultValue={floor}
@@ -167,7 +167,7 @@ export function EditModal({ roomDetails }) {
                       <FieldError />
                     </TextField>
 
-                    {/* Description */}
+                   
                     <div className="md:col-span-2">
                       <TextField
                         name="description"
@@ -187,7 +187,7 @@ export function EditModal({ roomDetails }) {
                       </TextField>
                     </div>
 
-                    {/* Image */}
+                    
                     <div className="md:col-span-2">
                       <TextField
                         name="image"
@@ -208,7 +208,7 @@ export function EditModal({ roomDetails }) {
                       </TextField>
                     </div>
 
-                    {/* Capacity */}
+                    
                     <TextField
                       name="capacity"
                       defaultValue={capacity}
@@ -227,7 +227,7 @@ export function EditModal({ roomDetails }) {
                       <FieldError />
                     </TextField>
 
-                    {/* Hourly Rate */}
+                    
                     <TextField
                       name="hourlyRate"
                       defaultValue={hourlyRate}
@@ -247,7 +247,7 @@ export function EditModal({ roomDetails }) {
                     </TextField>
                   </div>
 
-                  {/* Amenities */}
+                 
                   <div>
                     <h3 className="mb-4 text-lg font-medium text-white">
                       Amenities
@@ -280,7 +280,7 @@ export function EditModal({ roomDetails }) {
                     </div>
                   </div>
 
-                  {/* Footer */}
+                  
                   <Modal.Footer className="px-0">
                     <Button
                       type="submit"
@@ -294,6 +294,7 @@ export function EditModal({ roomDetails }) {
             </Modal.Body>
           </Modal.Dialog>
         </Modal.Container>
+         </Modal.Backdrop >
       </Modal>
     </>
   );

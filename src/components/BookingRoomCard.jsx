@@ -6,7 +6,7 @@ import { Button, DateField, Label } from "@heroui/react";
 import React, { useState } from "react";
 
 const BookingRoomCard = ({ roomDetails }) => {
-    const {_id, roomName, price, imageUrl, country} = roomDetails;
+    const {_id, roomName, hourlyRate, imageUrl, country} = roomDetails;
 
     const { data: session, isPending } = authClient.useSession();
     const user = session?.user;
@@ -47,10 +47,10 @@ const BookingRoomCard = ({ roomDetails }) => {
     }
 
     return (
-        <div className="flex flex-col mt-15 w-80 border border-[#e6e4e4] px-5 space-y-7 py-10 bg-base-200 rounded-md shadow-md hover:shadow-xl">
+        <div className="flex flex-col mt-8 w-80 border border-[#e6e4e4] px-5 space-y-7 py-10 bg-base-200 rounded-md shadow-md hover:shadow-xl">
             <div className="space-y-1">
                 <p>Starting from</p>
-                <h4><span className="text-4xl text-cyan-500">${price}</span></h4>
+                <h4><span className="text-4xl text-cyan-500">${hourlyRate}</span></h4>
                 <h4>per person</h4>
             </div>
             <div>
@@ -63,7 +63,7 @@ const BookingRoomCard = ({ roomDetails }) => {
                     </DateField.Group>
                 </DateField>
             </div>
-            <div>
+            <div className="mt-7">
                 <Button 
                     onClick={handleBooking} 
                     isDisabled={isPending || !user}

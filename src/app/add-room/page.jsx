@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const amenitiesList = [
@@ -16,7 +17,7 @@ const amenitiesList = [
 
 const AddRoomPage = () => {
   const user = authClient.useSession()
-
+  const router = useRouter();
 
 
 
@@ -37,6 +38,11 @@ const AddRoomPage = () => {
         })
 
         const data = await res.json()
+
+        if (data.insertedId) {
+          router.push("/library");
+        }
+        
 
         console.log(data)
 
@@ -76,6 +82,7 @@ const AddRoomPage = () => {
                 Room name *
               </label>
               <input
+                required
                 name="roomName"
                 type="text"
                 placeholder="e.g. Silent Focus Room A"
@@ -88,6 +95,7 @@ const AddRoomPage = () => {
                 Floor *
               </label>
               <input
+              required
               name="floor"
                 type="text"
                 placeholder="e.g. 3rd Floor"
@@ -103,6 +111,7 @@ const AddRoomPage = () => {
             </label>
 
             <textarea
+            required
             name="description"
             minLength={3}
               rows={5}
@@ -118,6 +127,7 @@ const AddRoomPage = () => {
             </label>
 
             <input
+            required
                 name="image"
               type="text"
               placeholder="https://example.com/room-photo.jpg"
@@ -134,6 +144,7 @@ const AddRoomPage = () => {
 
               <input 
                 name="capacity"
+                required
                 type="number"
                 min={10}
                 placeholder="e.g. 4"
@@ -148,6 +159,7 @@ const AddRoomPage = () => {
 
               <input
                 name="hourlyRate"
+                required
                 min={4}
                 type="number"
                 defaultValue={4}
