@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 
 const amenitiesList = [
@@ -14,6 +15,10 @@ const amenitiesList = [
 
 
 const AddRoomPage = () => {
+  const user = authClient.useSession()
+
+
+
 
     const handleAddRoom= async(e) =>{
         e.preventDefault()
@@ -21,8 +26,9 @@ const AddRoomPage = () => {
         const roomsData = Object.fromEntries(formData.entries());
 
         roomsData.amenities = selectedAmenities;
+        roomsData.user= user?.data?.session.userId;
 
-        const res= await fetch('http://localhost:4000/rooms', {
+        const res= await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`, {
             method:"POST",
             headers:{
                 'Content-Type': 'application/json'

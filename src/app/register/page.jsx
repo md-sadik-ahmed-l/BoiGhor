@@ -1,0 +1,133 @@
+"use client";
+import React from "react";
+import { Check } from "@gravity-ui/icons";
+import { FcGoogle } from "react-icons/fc";
+import {
+  Button,
+  Card,
+  Description,
+  FieldError,
+  Form,
+  Input,
+  Label,
+  TextField,
+} from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+
+const SignInPage = () => {
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const user = Object.fromEntries(formData.entries());
+    const { data, error } = await authClient.signUp.email({
+
+      name: user.name, // required
+      email: user.email , // required
+      password: user.password,
+      image: user.image,
+    //   callbackURL: "/",
+    });
+    // console.log(data)
+    if(data){
+        redirect('/'),
+        toast.success('Sign Up successful')
+    }
+
+  };
+
+  const handleSignIn = async () => {
+    await authClient.signIn.social({
+    provider: "google",
+  });
+};
+
+  return (
+    <div className="max-w-xl mx-auto my-15">
+      <Card className="bg-base-200 ">
+        <h1 className="flex justify-center text-3xl font-bold my-5">SignUp</h1>
+        <Form
+          onSubmit={onSubmit}
+          className="flex w-96 flex-col gap-4  mx-auto space-y-3"
+        >
+          <TextField isRequired name="name" type="text">
+            <Label>Name</Label>
+            <Input placeholder="Enter your name" />
+            <FieldError />
+          </TextField>
+
+          <TextField name="image" type="url">
+            <Label>Image Url</Label>
+            <Input placeholder="Enter your image url" />
+            <FieldError />
+          </TextField>
+
+          <TextField
+            isRequired
+            name="email"
+            type="email"
+            validate={(value) => {
+              if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+                return "Please enter a valid email address";
+              }
+              return null;
+            }}
+          >
+            <Label>Email</Label>
+            <Input placeholder="john@example.com" />
+            <FieldError />
+          </TextField>
+          <TextField
+            isRequired
+            minLength={8}
+            name="password"
+            type="password"
+            validate={(value) => {
+              if (value.length < 8) {
+                return "Password must be at least 8 characters";
+              }
+              if (!/[A-Z]/.test(value)) {
+                return "Password must contain at least one uppercase letter";
+              }
+              if (!/[0-9]/.test(value)) {
+                return "Password must contain at least one number";
+              }
+              return null;
+            }}
+          >
+            <Label>Password</Label>
+            <Input placeholder="Enter your password" />
+            <Description>
+              Must be at least 8 characters with 1 uppercase and 1 number
+            </Description>
+            <FieldError />
+          </TextField>
+          <div className="flex items-center justify-center gap-2">
+            <Button className='bg-cyan-500' type="submit">
+              <Check />
+              Submit
+            </Button>
+            <Button className='text-cyan-500' type="reset" variant="secondary">
+              Reset
+            </Button>
+          </div>
+        </Form>
+        <div className=" space-y-3 flex w-96 flex-col  mx-auto">
+            <h1 className="flex justify-center items-center mt-2">Or</h1>
+            <div>
+                <Button onClick={handleSignIn} variant="outline" className='w-full py-6'><FcGoogle />Sign in with Google</Button>
+            </div>
+            <div className="flex gap-1 justify-center items-center ">
+                <h1>Already have an account?<Link href={'/login'} className="text-xl font-medium text-cyan-500 hover:bg-cyan-100 hover:rounded-md">Login</Link></h1>
+                
+            </div>
+        </div>
+      </Card>
+    </div>
+  );
+};
+
+export default SignInPage;

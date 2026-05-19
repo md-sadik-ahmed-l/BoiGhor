@@ -1,0 +1,64 @@
+"use client";
+
+import { authClient } from "@/lib/auth-client";
+import { TrashBin } from "@gravity-ui/icons";
+import { AlertDialog, Button } from "@heroui/react";
+// import { revalidatePath } from "next/cache";
+
+export function DeleteDestination({ roomDetails }) {
+
+    
+
+  const { _id, user, destinationName } = roomDetails;
+  console.log(user)
+  const handleDelete = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${_id}`, {
+      method: "DELETE",
+      headers: {
+        "contain-type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+
+    // if (data.deletedCount > 0) {
+    //   revalidatePath("/destinations");
+    // }
+    // return data;
+  };
+
+  return (
+    <AlertDialog>
+      <AlertDialog.Trigger className="group flex items-center  bg-surface  shadow-xs select-none hover:bg-surface-secondary">
+        <div className="flex  px-5 py-3 shrink-0 items-center justify-center  bg-danger-soft text-danger-soft-foreground">
+          <TrashBin className="size-6" />
+          <p className="text-xl font-semibold pt-2">Delete</p>
+        </div>
+      </AlertDialog.Trigger>
+      <AlertDialog.Backdrop>
+        <AlertDialog.Container>
+          <AlertDialog.Dialog className="sm:max-w-[400px]">
+            <AlertDialog.CloseTrigger />
+            <AlertDialog.Header>
+              <AlertDialog.Icon status="danger">
+                <TrashBin className="size-5" />
+              </AlertDialog.Icon>
+              <AlertDialog.Heading>Delete this item?</AlertDialog.Heading>
+            </AlertDialog.Header>
+            <AlertDialog.Body>
+              <p>{destinationName} is permanent deleted?</p>
+            </AlertDialog.Body>
+            <AlertDialog.Footer>
+              <Button slot="close" variant="tertiary">
+                Cancel
+              </Button>
+              <Button onClick={handleDelete} slot="close" variant="danger">
+                Confirm Delete
+              </Button>
+            </AlertDialog.Footer>
+          </AlertDialog.Dialog>
+        </AlertDialog.Container>
+      </AlertDialog.Backdrop>
+    </AlertDialog>
+  );
+}

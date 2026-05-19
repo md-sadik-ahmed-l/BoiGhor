@@ -1,10 +1,14 @@
 
 
-// import BookingCard from "@/components/BookingCard";
+
 // import { DeleteDestination } from "@/components/DeleteDestination";
 // import { EditModal } from "@/components/EditModal";
 // import { auth } from "@/lib/auth";
 // import { ArrowRight } from "@gravity-ui/icons";
+import BookingRoomCard from "@/components/BookingRoomCard";
+import { DeleteDestination } from "@/components/DeleteDestination";
+import { auth } from "@/lib/auth";
+
 import { Button, Card, Input } from "@heroui/react";
 import { headers } from "next/headers";
 import Image from "next/image";
@@ -28,13 +32,24 @@ const RoomsDetailsPage = async ({ params }) => {
 //   }
 );
   const roomDetails = await res.json();
+//   console.log(roomDetails)
+
+  const user = roomDetails.user
+
+  const session = await auth.api.getSession({headers: await headers()});
+
+    console.log(session.session.userId)
+
+    const crantuserId = session.session.userId
 
   return (
     <div className="">
       <div className=" max-w-7xl mx-auto my-15">
         <div className="mb-4 flex justify-end items-center gap-5">
           {/* <EditModal roomDetails={roomDetails}></EditModal> */}
-          {/* <DeleteDestination roomDetails={roomDetails}></DeleteDestination> */}
+          {
+            user=== crantuserId && <DeleteDestination roomDetails={roomDetails}></DeleteDestination>
+          }
         </div>
 
         <div className="relative w-full h-150">
@@ -73,7 +88,7 @@ const RoomsDetailsPage = async ({ params }) => {
             </div>
           </div>
 
-         {/* <BookingCard roomDetails={roomDetails}></BookingCard> */}
+         <BookingRoomCard roomDetails={roomDetails}></BookingRoomCard>
 
         </div>
       </div>
