@@ -1,6 +1,7 @@
 import {Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const Josefin = Josefin_Sans({
   
@@ -21,7 +22,8 @@ export default function RootLayout({ children }) {
 
       <body className="min-h-full flex flex-col">
         <Navbar></Navbar>
-       <div> {children}</div>
+       <div className="flex-1"> {children}</div>
+       <Footer></Footer>
 
       </body>
 

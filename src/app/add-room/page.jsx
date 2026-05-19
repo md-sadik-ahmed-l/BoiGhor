@@ -11,8 +11,31 @@ const amenitiesList = [
   "Air Conditioning",
 ];
 
+
+
 const AddRoomPage = () => {
-   
+
+    const handleAddRoom= async(e) =>{
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget);
+        const roomsData = Object.fromEntries(formData.entries());
+
+        roomsData.amenities = selectedAmenities;
+
+        const res= await fetch('http://localhost:4000/rooms', {
+            method:"POST",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(roomsData)
+        })
+
+        const data = await res.json()
+
+        console.log(data)
+
+    }
+
 
 
   const [selectedAmenities, setSelectedAmenities] = useState([]);
@@ -30,7 +53,7 @@ const AddRoomPage = () => {
   return (
     <div className="min-h-screen bg-[#151515] text-white flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-5xl bg-[#1d1d1d] border border-gray-700 rounded-2xl p-8 md:p-10 shadow-xl">
-        {/* Header */}
+      
         <div className="mb-10">
           <h1 className="text-4xl font-bold">Add a new room</h1>
           <p className="text-gray-400 mt-2 text-lg">
@@ -38,15 +61,16 @@ const AddRoomPage = () => {
           </p>
         </div>
 
-        {/* Form */}
-        <form className="space-y-6">
-          {/* Room + Floor */}
+       
+        <form onSubmit={handleAddRoom} className="space-y-6">
+        
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label className="block mb-2 text-sm font-medium">
                 Room name *
               </label>
               <input
+                name="roomName"
                 type="text"
                 placeholder="e.g. Silent Focus Room A"
                 className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-violet-500"
@@ -58,6 +82,7 @@ const AddRoomPage = () => {
                 Floor *
               </label>
               <input
+              name="floor"
                 type="text"
                 placeholder="e.g. 3rd Floor"
                 className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-violet-500"
@@ -65,41 +90,46 @@ const AddRoomPage = () => {
             </div>
           </div>
 
-          {/* Description */}
+          
           <div>
             <label className="block mb-2 text-sm font-medium">
               Description *
             </label>
 
             <textarea
+            name="description"
+            minLength={3}
               rows={5}
               placeholder="Describe your room — size, environment, what makes it great..."
               className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-3 outline-none resize-none focus:border-violet-500"
             />
           </div>
 
-          {/* Image URL */}
+        
           <div>
             <label className="block mb-2 text-sm font-medium">
               Image URL *
             </label>
 
             <input
+                name="image"
               type="text"
               placeholder="https://example.com/room-photo.jpg"
               className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-violet-500"
             />
           </div>
 
-          {/* Capacity + Rate */}
+         
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label className="block mb-2 text-sm font-medium">
                 Seat capacity *
               </label>
 
-              <input
+              <input 
+                name="capacity"
                 type="number"
+                min={10}
                 placeholder="e.g. 4"
                 className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-violet-500"
               />
@@ -111,6 +141,8 @@ const AddRoomPage = () => {
               </label>
 
               <input
+                name="hourlyRate"
+                min={4}
                 type="number"
                 defaultValue={4}
                 className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-violet-500"
@@ -118,7 +150,7 @@ const AddRoomPage = () => {
             </div>
           </div>
 
-          {/* Amenities */}
+         
           <div>
             <label className="block mb-4 text-sm font-medium">
               Amenities
@@ -140,6 +172,7 @@ const AddRoomPage = () => {
                     }`}
                   >
                     <input
+                        name="amenities"
                       type="checkbox"
                       checked={active}
                       readOnly
@@ -153,7 +186,7 @@ const AddRoomPage = () => {
             </div>
           </div>
 
-          {/* Submit */}
+          
           <button
             type="submit"
             className="mt-2 bg-[#232323] hover:bg-[#2a2a2a] border border-gray-700 rounded-xl px-6 py-3 text-lg font-medium transition-all"
