@@ -23,7 +23,7 @@ const Navbar = () => {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/library", label: "Library" },
-    { href: "/bookings", label: "My Bookings" },
+    { href: "/my-bookings", label: "My Bookings" },
     { href: "/add-room", label: "Add Room" },
   ];
 
