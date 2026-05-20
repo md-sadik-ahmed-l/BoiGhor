@@ -16,17 +16,16 @@ import { MdLocationOn } from "react-icons/md";
 const RoomsDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-//   const {token} = await auth.api.getToken({
-//     headers: await headers()
-//   })
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-rooms/${id}`, 
-//     {
-//     headers:{
-//       authorization: `Bearer ${token}`
-//     }
-//   }
-);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-rooms/${id}`, {
+    headers:{
+      authorization: `Bearer ${token}`
+    }
+  });
+
   const roomDetails = await res.json();
   // console.log(roomDetails)
 

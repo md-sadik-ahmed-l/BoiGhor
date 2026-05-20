@@ -23,7 +23,7 @@ export default function Home() {
 
     async function fetchRooms() {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-rooms`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/home-rooms`);
 
         const data = await res.json();
 
@@ -31,7 +31,7 @@ export default function Home() {
 
         if (res.ok) {
           
-          setRoomsData(data?.roomsData || []);
+          setRoomsData(data || []);
         }
       } catch (error) {
         console.error("Failed to fetch rooms:", error);

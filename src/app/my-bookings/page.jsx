@@ -15,10 +15,22 @@ const MyBookingsPage = async() => {
     const user = session?.user;
     // console.log(user)
 
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-bookings/user/${user?.id}`);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-bookings/user/${user?.id}`, {
+        headers:{
+        authorization: `Bearer ${token}`
+    }
+    });
     const myBookingData = await res.json();
     // console.log(myBookingData)
+
+    
+
+
     return (
         <div className='max-w-6xl mx-auto mt-15'>
             <div className='my-5'>

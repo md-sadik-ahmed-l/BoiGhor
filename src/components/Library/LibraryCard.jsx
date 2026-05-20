@@ -20,6 +20,8 @@ const LibraryCard = ({ roomData }) => {
     description,
   } = roomData;
 
+  console.log(roomData)
+  
   return (
     <div className="max-w-100 ">
       <div className="space-y-5">

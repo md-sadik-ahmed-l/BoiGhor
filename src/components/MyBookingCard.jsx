@@ -7,6 +7,9 @@ import { FaEye } from "react-icons/fa6";
 
 const MyBookingCard = ({ myBooking }) => {
   const { roomName, image, totalPrice, departureDate, startTime, endTime, duration, floor, status} = myBooking;
+
+
+//   const handleCancelBooking = ()=>
   
   return (
     <div className="flex justify-between items-center p-5 border border-[#e4e4e4] shadow-sm ">
