@@ -1,11 +1,24 @@
 import MyBookingCard from '@/components/MyBookingCard';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import React from 'react';
 
-const MyBookingsPage = async() => {
+export const metadata = {
+  title: "BoiGhor || Bookings",
+};
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-bookings`);
+
+const MyBookingsPage = async() => {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    });
+    const user = session?.user;
+    // console.log(user)
+
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-bookings/user/${user?.id}`);
     const myBookingData = await res.json();
-    console.log(myBookingData)
+    // console.log(myBookingData)
     return (
         <div className='max-w-6xl mx-auto mt-15'>
             <div className='my-5'>

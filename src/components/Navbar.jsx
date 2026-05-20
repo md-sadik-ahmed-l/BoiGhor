@@ -25,6 +25,7 @@ const Navbar = () => {
     { href: "/library", label: "Library" },
     { href: "/my-bookings", label: "My Bookings" },
     { href: "/add-room", label: "Add Room" },
+    { href: "/my-listings", label: "My Listings" },
   ];
 
   const links = (

@@ -19,7 +19,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    document.title = "StudyNook – Home";
+    document.title = "BoiGhor || Home";
 
     async function fetchRooms() {
       try {

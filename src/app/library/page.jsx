@@ -1,6 +1,10 @@
 import LibraryCard from '@/components/Library/LibraryCard';
 import React from 'react';
 
+export const metadata = {
+  title: "BoiGhor || Library",
+};
+
 const LibraryPage = async() => {
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-rooms`);
