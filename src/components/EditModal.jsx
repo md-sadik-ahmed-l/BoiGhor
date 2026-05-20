@@ -15,6 +15,7 @@ import {
   TextField,
   useOverlayState,
 } from "@heroui/react";
+import { toast } from "react-toastify";
 
 const amenitiesList = [
   "Wi-Fi",
@@ -87,6 +88,8 @@ export function EditModal({ roomDetails }) {
         state.close();
       }
 
+      toast.success("Your Room update success full")
+
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -98,11 +101,11 @@ export function EditModal({ roomDetails }) {
       {/* Modal */}
       <Modal state={state}>
         
-        <Modal.Trigger className="flex justify-end">
-          <Button className="rounded-none px-4 py-[30px]">
-            <Pencil className="w-4 h-4" />
+        <Modal.Trigger className="flex justify-end py-4 px-5 hover:bg-[#4b4a4a]  bg-[#313030] border rounded-md">
+          <div className=" flex rounded-none   text-xl">
+            <Pencil className="w-6 h-6" />
             Edit Room
-          </Button>
+          </div>
         </Modal.Trigger>
 
         <Modal.Backdrop >

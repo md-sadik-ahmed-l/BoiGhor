@@ -4,6 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { TrashBin } from "@gravity-ui/icons";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 // import { revalidatePath } from "next/cache";
 
 export function DeleteRoom({ roomDetails }) {
@@ -24,14 +25,15 @@ export function DeleteRoom({ roomDetails }) {
 
     if (data.deletedCount > 0) {
      router.push("/library");
+     toast.success("Room deleted successfully")
     }
     return data;
   };
 
   return (
     <AlertDialog>
-      <AlertDialog.Trigger className="group flex items-center  bg-surface  shadow-xs select-none hover:bg-surface-secondary">
-        <div className="flex  px-5 py-3 shrink-0 items-center justify-center  bg-danger-soft text-danger-soft-foreground">
+      <AlertDialog.Trigger className="group flex items-center  border  rounded-md shadow-xs select-none hover:bg-surface-secondary">
+        <div className="flex  px-8 py-3 shrink-0 items-center justify-center  bg-danger-soft text-danger-soft-foreground hover:bg-red-500 hover:text-white rounded-md">
           <TrashBin className="size-6" />
           <p className="text-xl font-semibold pt-2">Delete</p>
         </div>

@@ -76,7 +76,7 @@ const LibraryPage = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <div className="lg:col-span-3 sticky top-59 z-49 bg-zinc-900 text-white mb-10 p-6 rounded-2xl h-fit">
+        <div className="hidden sm:flex flex-col lg:col-span-3  sticky top-59 z-49 bg-zinc-900 text-white mb-10 p-6 rounded-2xl h-fit">
           <div>
             <h2 className="text-2xl font-semibold mb-4">Amenities</h2>
 

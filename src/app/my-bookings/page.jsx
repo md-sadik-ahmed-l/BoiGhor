@@ -26,8 +26,9 @@ const MyBookingsPage = async () => {
       <div className="max-w-5xl mx-auto px-4 md:px-6 py-16">
 
         
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-3">
+        <div className="mb-12 ">
+          <div className=''>
+            <div className="flex items-center gap-3 mb-3">
             <span className="w-8 h-[2px] bg-amber-400 rounded-full" />
             <span className="text-[10px] tracking-[0.3em] uppercase text-amber-400 font-bold">
               Dashboard
@@ -36,20 +37,28 @@ const MyBookingsPage = async () => {
           <h1 className="text-5xl font-black tracking-tight text-white mb-3">
             My Bookings
           </h1>
-          <p className="text-white/40 text-base">
+          
+          </div>
+
+         <div className='flex justify-between items-center'>
+            <p className="text-white/40 text-base">
             All rooms you have booked — manage and cancel from here
           </p>
 
-         
-          {myBookingData?.length > 0 && (
+          <div>
+
+            {myBookingData?.length > 0 && (
             <div className="mt-5 inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2">
               <MdCalendarMonth className="text-amber-400 text-base" />
               <span className="text-sm text-white/60">
-                <span className="text-white font-bold">{myBookingData.length}</span>{' '}
+                <span className="text-white text-xl font-bold">{myBookingData.length}</span>{' '}
                 active booking{myBookingData.length !== 1 ? 's' : ''}
               </span>
             </div>
           )}
+          </div>
+         </div>
+          
         </div>
 
         

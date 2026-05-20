@@ -38,8 +38,8 @@ const MyListingsPage = async() => {
 
     return (
         <div className='max-w-6xl mx-auto my-15'>
-            <h1 className='text-4xl my-10 font-bold '>My own house </h1>
-            <div className='grid grid-cols-3 gap-10 '>
+            <h1 className='px-4 text-4xl my-10 font-bold '>My own house </h1>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 '>
                 {
                     myListings.map(roomData => <LibraryCard key={roomData._id} roomData={roomData}></LibraryCard>)
                 }

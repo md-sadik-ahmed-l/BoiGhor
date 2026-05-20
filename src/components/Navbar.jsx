@@ -45,7 +45,7 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 z-50 px-2  bg-white">
-      <div className="navbar container mx-auto">
+      <div className="navbar container mx-auto space-x-2">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
@@ -84,7 +84,7 @@ const Navbar = () => {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="p-2 hover:bg-white/50 rounded-full transition-colors"
+            className="p-2 hidden sm:flex hover:bg-white/50 rounded-full transition-colors"
           >
             <IoSearch className="text-xl md:text-2xl text-sun-dark" />
           </motion.button>

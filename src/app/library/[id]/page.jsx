@@ -37,7 +37,7 @@ const RoomsDetailsPage = async ({ params }) => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white">
-      {/* Hero Image Section */}
+      
       <div className="relative w-full h-[65vh] overflow-hidden">
         <Image
           alt={roomDetails.roomName}
@@ -46,19 +46,14 @@ const RoomsDetailsPage = async ({ params }) => {
           className="object-cover scale-105 transition-transform duration-700"
           priority
         />
-        {/* Gradient overlays */}
+        
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0f]/50 to-transparent" />
 
-        {/* Floating badge */}
-        <div className="absolute top-6 left-6">
-          <span className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-semibold px-4 py-2 rounded-full tracking-widest uppercase">
-            <HiSparkles className="text-amber-400 text-sm" />
-            Premium Room
-          </span>
-        </div>
+       
+        
 
-        {/* Hero text overlay */}
+        
         <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 max-w-5xl mx-auto">
           <p className="flex items-center gap-1.5 text-amber-400/80 text-sm font-medium mb-2 tracking-wide">
             <MdLocationOn className="text-amber-400" />
@@ -70,9 +65,9 @@ const RoomsDetailsPage = async ({ params }) => {
         </div>
       </div>
 
-      {/* Content Section */}
+      
       <div className="max-w-5xl mx-auto px-4 md:px-6 -mt-2 pb-20">
-        {/* Quick Stats Bar */}
+        
         <div className="flex flex-wrap gap-4 py-6 border-b border-white/10 mb-10">
           <div className="flex items-center gap-2 text-white/70">
             <MdPeople className="text-amber-400 text-xl" />
@@ -89,9 +84,9 @@ const RoomsDetailsPage = async ({ params }) => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-10">
-          {/* Left: Details */}
+          
           <div className="flex-1 space-y-10">
-            {/* Overview */}
+            
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="w-8 h-[2px] bg-amber-400 rounded-full" />
@@ -102,7 +97,7 @@ const RoomsDetailsPage = async ({ params }) => {
               </p>
             </div>
 
-            {/* Amenities */}
+            
             {amenities?.length > 0 && (
               <div>
                 <div className="flex items-center gap-3 mb-5">
@@ -122,10 +117,10 @@ const RoomsDetailsPage = async ({ params }) => {
               </div>
             )}
 
-            {/* Admin Actions */}
+            
             {user === crantuserId && (
               <div>
-                <div className="flex items-center gap-3 mb-5">
+                <div className="flex items-center gap-3 mb-5 mt-10 sm:mt-30">
                   <span className="w-8 h-[2px] bg-amber-400 rounded-full" />
                   <h2 className="text-xs font-bold tracking-[0.3em] text-amber-400 uppercase">Manage Room</h2>
                 </div>
@@ -141,7 +136,7 @@ const RoomsDetailsPage = async ({ params }) => {
             )}
           </div>
 
-          {/* Right: Booking Card — wrapped for dark styling */}
+          
           <div className="lg:w-[340px] shrink-0">
             <div className="sticky top-8 bg-white/5 border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-black/50 backdrop-blur-md">
               <div className="px-6 pt-6 pb-2">

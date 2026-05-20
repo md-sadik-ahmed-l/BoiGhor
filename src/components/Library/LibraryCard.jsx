@@ -7,7 +7,7 @@ import Link from "next/link";
 import { User } from "lucide-react";
 
 const LibraryCard = ({ roomData }) => {
-  
+
   const {
     _id,
     roomName,
@@ -71,7 +71,7 @@ const LibraryCard = ({ roomData }) => {
         <Link href={`/library/${_id}`}>
           <div className="group/btn flex items-center justify-between bg-[#ecebeb] hover:bg-amber-400 border border-[#dcdcdc] hover:border-amber-400 rounded-xl px-5 py-3 transition-all duration-200 cursor-pointer">
             <span className="text-amber-400 group-hover/btn:text-black text-sm font-bold tracking-widest uppercase transition-colors duration-200">
-              Book Now
+              View Details
             </span>
             <HiArrowUpRight className="text-amber-400 group-hover/btn:text-black text-base transition-all duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
           </div>
