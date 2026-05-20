@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BoiGhor – Library Study Room Booking
 
-## Getting Started
+## Live Site: 
 
-First, run the development server:
+StudyNook is a full-stack web application where students and library users can browse, book, and manage study rooms easily. Users can list their own study rooms, manage bookings, and prevent double-booking through smart time conflict detection.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##  Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+-  Secure JWT Authentication with HTTP-only Cookies
+-  Browse and Search Available Study Rooms
+-  Add, Update, and Delete Personal Room Listings
+-  Smart Booking System with Time Conflict Detection
+-  Prevents Double Booking for Same Time Slots
+-  Automatic Booking Cost Calculation
+-  Manage Personal Bookings and Listings
+-  Cancel Bookings with Status Update
+-  Fully Responsive for Mobile, Tablet, and Desktop
+-  Beautiful Toast Notifications and Loading States
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Homepage Sections
 
-To learn more about Next.js, take a look at the following resources:
+- Hero Banner Section
+- Latest Available Rooms Section
+- Extra Informative Sections
+- Responsive Navbar & Footer
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Authentication Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Email & Password Login/Register
+- Google Authentication
+- Persistent Login on Reload
+- Protected Private Routes
+- Secure Cookie-based Authentication
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+##  Room Management
+
+Authenticated users can:
+
+- Add New Study Rooms
+- Update Room Information
+- Delete Their Own Rooms
+- Manage Room Amenities
+- View Booking Counts
+
+
+##  Booking Features
+
+- Book Rooms by Date & Time
+- Real-Time Booking Conflict Prevention
+- Automatic Total Price Calculation
+- Cancel Upcoming Bookings
+- Booking Status Tracking
+
+
+##  Search & Filter
+
+Users can:
+
+- Search rooms by room name
+- Filter by amenities
+- Filter by floor
+- Filter by hourly price range
+
+
+##  Technologies Used
+
+### Frontend
+- Next.js
+- React.js
+- Tailwind CSS
+- HeroUI
+- Framer Motion
+- Sonner / React Hot Toast
+
+## Backend
+- Node.js
+- Express.js
+- MongoDB
+- JWT
+- Cookie Parser
+
+
+### NPM Packages
+
+### Client Side
+
+bash
+next
+react
+tailwindcss
+axios
+react-hot-toast
+framer-motion
+react-icons
+@heroui/react

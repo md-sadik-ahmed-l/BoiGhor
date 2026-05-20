@@ -1,13 +1,13 @@
-
 import React from "react";
 import Image from "next/image";
 import { MdLocationOn } from "react-icons/md";
-import { FaArrowUp } from "react-icons/fa6";
 import { IoCalendarNumberOutline } from "react-icons/io5";
+import { HiArrowUpRight } from "react-icons/hi2";
 import Link from "next/link";
-import { Button } from "@heroui/react";
+import { User } from "lucide-react";
 
 const LibraryCard = ({ roomData }) => {
+  
   const {
     _id,
     roomName,
@@ -15,49 +15,67 @@ const LibraryCard = ({ roomData }) => {
     category,
     hourlyRate,
     capacity,
-    departureDate,
     image,
-    description,
   } = roomData;
 
-  console.log(roomData)
-  
   return (
-    <div className="max-w-100 ">
-      <div className="space-y-5">
+    <div className="group relative p-4 bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 hover:shadow-md rounded-2xl overflow-hidden transition-all duration-300 max-w-sm">
 
-        <div className="relative w-full h-56">
-          <Image
-            alt={roomName}
-            src={image.trimStart()}
-            fill         
-            className="object-cover"
-          />
+      
+      <div className="relative w-full h-52 overflow-hidden">
+        <Image
+          alt={roomName}
+          src={image.trimStart()}
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/80 via-transparent to-transparent" />
+
+       
+        {category && (
+          <span className="absolute top-3 left-3 bg-black/50 backdrop-blur-md border border-white/10 text-white/70 text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full">
+            {category}
+          </span>
+        )}
+
+       
+        <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md border border-amber-400/20 rounded-xl px-3 py-1.5">
+          <span className="text-amber-400 font-black text-lg">${hourlyRate}</span>
+          <span className="text-white/80 text-[10px] ml-1">/hr</span>
         </div>
+      </div>
 
-        <div>
-
-          <h3 className="flex items-center">
-            <MdLocationOn></MdLocationOn>
+      
+      <div className="py-5 space-y-4">
+        <div className="space-y-1">
+          <p className="flex items-center gap-1 text-xs text-black">
+            <MdLocationOn className="text-amber-400 shrink-0 text-xl" />
             {floor}
-          </h3>
+          </p>
+          <h1 className="text-xl font-black text-black leading-tight">{roomName}</h1>
+        </div>
 
-            <h1 className="text-2xl">{roomName}</h1>
-
-          <div className="flex justify-between mt-2">
-            <h4 className="flex items-center  gap-1"><span><IoCalendarNumberOutline /> </span><span>Capacity:{capacity}</span></h4>
-
-          
-            <h4>
-              <span className="text-2xl">${hourlyRate}</span>
-              <span>/per hour</span>
-            </h4>
-          </div>
-
+        <div className="flex items-center gap-2">
+         
+            <h1><User className="text-black" /></h1>
+            <h1 className="">Capacity: <span className="text-black font-semibold">{capacity}</span></h1>
           
         </div>
-        <div>
-            <Link href={`/library/${_id}`}><Button variant="outline" className='text-[#15A1BF] font-extrabold text-'>BOOK NOW<span className="text-[#15A1BF] text-lg">↗</span></Button></Link>
+
+        
+        <div className="">
+          <div className="border-t border-[#8e8d8d] m-5" />
+
+        
+        <Link href={`/library/${_id}`}>
+          <div className="group/btn flex items-center justify-between bg-[#ecebeb] hover:bg-amber-400 border border-[#dcdcdc] hover:border-amber-400 rounded-xl px-5 py-3 transition-all duration-200 cursor-pointer">
+            <span className="text-amber-400 group-hover/btn:text-black text-sm font-bold tracking-widest uppercase transition-colors duration-200">
+              Book Now
+            </span>
+            <HiArrowUpRight className="text-amber-400 group-hover/btn:text-black text-base transition-all duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+          </div>
+        </Link>
         </div>
       </div>
     </div>

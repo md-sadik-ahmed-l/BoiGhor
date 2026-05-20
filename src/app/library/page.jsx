@@ -1,23 +1,58 @@
+"use client";
 
+import { useEffect, useMemo, useState } from "react";
 import LibraryCard from "@/components/Library/LibraryCard";
 
-export const metadata = {
-  title: "BoiGhor || Library",
-};
+const LibraryPage = () => {
+  const [roomsData, setRoomsData] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [sortOption, setSortOption] = useState("latest");
 
-const LibraryPage = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/all-rooms`,
-    {
-      cache: "no-store",
+  
+  useEffect(() => {
+    const fetchRooms = async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/all-rooms`,
+        {
+          cache: "no-store",
+        }
+      );
+
+      const data = await res.json();
+      setRoomsData(data);
+    };
+
+    fetchRooms();
+  }, []);
+
+ 
+  const filteredRooms = useMemo(() => {
+    let filtered = [...roomsData];
+
+    
+    if (searchText) {
+      filtered = filtered.filter((room) =>
+        room.roomName
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
+      );
     }
-  );
 
-  const roomsData = await res.json();
+    
+    if (sortOption === "low") {
+      filtered.sort((a, b) => a.hourlyRate - b.hourlyRate);
+    }
+
+    if (sortOption === "high") {
+      filtered.sort((a, b) => b.hourlyRate - a.hourlyRate);
+    }
+
+    return filtered;
+  }, [roomsData, searchText, sortOption]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 ">
-      {/* Top Section */}
+      
       <div className="py-5 sticky top-16 z-50 bg-white">
         <h1 className="text-5xl font-bold text-indigo-900 mb-6">
           Browse study rooms
@@ -26,7 +61,9 @@ const LibraryPage = async () => {
         <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
           <input
             type="text"
-            placeholder="Focus Room"
+            placeholder="Search room..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
             className="w-full md:w-[500px] bg-zinc-900 text-white px-5 py-4 rounded-xl outline-none border border-zinc-800"
           />
 
@@ -34,32 +71,18 @@ const LibraryPage = async () => {
             Search
           </button>
         </div>
-
-        {/* <div className="flex flex-wrap items-center gap-3 mt-5 text-sm">
-          <p className="text-zinc-500 font-medium">Active filters:</p>
-
-          <div className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">
-            Wi‑Fi ×
-          </div>
-
-          <div className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">
-            Projector ×
-          </div>
-
-          <button className="text-red-500 font-medium">Clear all</button>
-        </div> */}
       </div>
 
-      {/* Main Content */}
+      
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Sidebar */}
-        <div className="lg:col-span-3 sticky top-59 z-49  bg-zinc-900 text-white mb-10 p-6 rounded-2xl h-fit">
+        
+        <div className="lg:col-span-3 sticky top-59 z-49 bg-zinc-900 text-white mb-10 p-6 rounded-2xl h-fit">
           <div>
             <h2 className="text-2xl font-semibold mb-4">Amenities</h2>
 
             <div className="space-y-2.5">
               {[
-                "Wi‑Fi",
+                "Wi-Fi",
                 "Projector",
                 "Whiteboard",
                 "Power Outlets",
@@ -80,7 +103,9 @@ const LibraryPage = async () => {
           <div className="border-t border-zinc-700 my-4"></div>
 
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Hourly rate ($)</h2>
+            <h2 className="text-2xl font-semibold mb-4">
+              Hourly rate ($)
+            </h2>
 
             <div className="flex gap-3">
               <input
@@ -103,15 +128,20 @@ const LibraryPage = async () => {
             <h2 className="text-2xl font-semibold mb-4">Floor</h2>
 
             <div className="space-y-3">
-              {["1st Floor", "2nd Floor", "3rd Floor"].map((floor) => (
-                <label
-                  key={floor}
-                  className="flex items-center gap-3 text-zinc-300"
-                >
-                  <input type="checkbox" className="w-4 h-4" />
-                  {floor}
-                </label>
-              ))}
+              {["1st Floor", "2nd Floor", "3rd Floor"].map(
+                (floor) => (
+                  <label
+                    key={floor}
+                    className="flex items-center gap-3 text-zinc-300"
+                  >
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4"
+                    />
+                    {floor}
+                  </label>
+                )
+              )}
             </div>
           </div>
 
@@ -120,26 +150,35 @@ const LibraryPage = async () => {
           </button>
         </div>
 
-        {/* Cards Section */}
+        
         <div className="lg:col-span-9 mb-10">
           <div className="flex flex-col sticky top-58 z-49 bg-white md:flex-row md:items-center md:justify-between gap-5 pb-4">
             <h2 className="text-2xl font-semibold">
-              Showing {roomsData.length} rooms
+              Showing {filteredRooms.length} rooms
             </h2>
 
-            <select className="bg-zinc-900 text-white border border-zinc-700 px-5 py-4 rounded-xl outline-none">
-              <option>Sort: Latest</option>
-              <option>Low to High Price</option>
-              <option>High to Low Price</option>
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              className="bg-zinc-900 text-white border border-zinc-700 px-5 py-4 rounded-xl outline-none"
+            >
+              <option value="latest">Sort: Latest</option>
+              <option value="low">
+                Low to High Price
+              </option>
+              <option value="high">
+                High to Low Price
+              </option>
             </select>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {roomsData.map((roomData) => (
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 sm:gap-6 gap-4">
+            {filteredRooms.map((roomData) => (
               <LibraryCard
                 key={roomData._id}
                 roomData={roomData}
-              ></LibraryCard>
+              />
             ))}
           </div>
         </div>

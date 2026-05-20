@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = () => {
   return (
     <footer className="bg-black text-gray-400 px-6 md:px-16 py-8">
@@ -34,10 +36,12 @@ const Footer = () => {
           <div>
             <h3 className="text-white mb-3 tracking-wide">QUICK LINKS</h3>
             <ul className="space-y-2">
-              <li className="hover:text-white cursor-pointer">Home</li>
-              <li className="hover:text-white cursor-pointer">Library</li>
-              <li className="hover:text-white cursor-pointer">My Bookings</li>
-              <li className="hover:text-white cursor-pointer">Add Room</li>
+
+              <Link href={"/"}>  <li className="hover:text-white cursor-pointer">Home</li> </Link>
+              <Link href={"/library"}> <li className="hover:text-white cursor-pointer">Library</li> </Link>
+              <Link href={"/my-bookings"}> <li className="hover:text-white cursor-pointer">My Bookings</li> </Link>
+              <Link href={"/my-listings"}> <li className="hover:text-white cursor-pointer">My Listings</li> </Link>
+              
             </ul>
           </div>
 
@@ -59,7 +63,7 @@ const Footer = () => {
           <div>
             <h3 className="text-white mb-3 tracking-wide">CONTACT US</h3>
             <ul className="space-y-2">
-              <li>786 901 1622</li>
+              <li>+8801741108269</li>
               <li>library@boighor.com</li>
             </ul>
           </div>

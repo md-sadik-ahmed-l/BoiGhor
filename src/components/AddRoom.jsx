@@ -24,7 +24,7 @@ import React from 'react';
 const AddRoom = () => {
 
     const user = authClient.useSession()
-  const router = useRouter();
+    const router = useRouter();
 
 
 
@@ -73,21 +73,21 @@ const AddRoom = () => {
   };
 
     return (
-        <div className="min-h-screen bg-[#151515] text-white flex items-center justify-center px-4 py-10">
+        <div className=" bg-[#151515] text-white flex items-center justify-center px-4 py-7">
 
-      <div className="w-full max-w-5xl bg-[#1d1d1d] border border-gray-700 rounded-2xl p-8 md:p-10 shadow-xl">
+      <div className="w-full max-w-4xl bg-[#1d1d1d] p-3 border border-gray-700 rounded-2xl  md:p-10 shadow-xl">
       
-        <div className="mb-10">
+        <div className="mb-5">
           <h1 className="text-4xl font-bold">Add a new room</h1>
-          <p className="text-gray-400 mt-2 text-lg">
+          <p className="text-gray-400 mt-1 text-lg">
             Fill in the details to list your study room on StudyNook
           </p>
         </div>
 
        
-        <form onSubmit={handleAddRoom} className="space-y-6">
+        <form onSubmit={handleAddRoom} className="space-y-4">
         
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
               <label className="block mb-2 text-sm font-medium">
                 Room name *
@@ -125,7 +125,7 @@ const AddRoom = () => {
             required
             name="description"
             minLength={3}
-              rows={5}
+              rows={3}
               placeholder="Describe your room — size, environment, what makes it great..."
               className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-3 outline-none resize-none focus:border-violet-500"
             />
@@ -142,7 +142,7 @@ const AddRoom = () => {
                 name="image"
               type="text"
               placeholder="https://example.com/room-photo.jpg"
-              className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-violet-500"
+              className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-2 outline-none focus:border-violet-500"
             />
           </div>
 
@@ -159,7 +159,7 @@ const AddRoom = () => {
                 type="number"
                 min={10}
                 placeholder="e.g. 10"
-                className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-violet-500"
+                className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-2 outline-none focus:border-violet-500"
               />
             </div>
 
@@ -174,7 +174,7 @@ const AddRoom = () => {
                 min={4}
                 type="number"
                 defaultValue={4}
-                className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-violet-500"
+                className="w-full bg-[#232323] border border-gray-700 rounded-xl px-4 py-2 outline-none focus:border-violet-500"
               />
             </div>
           </div>
@@ -185,7 +185,7 @@ const AddRoom = () => {
               Amenities
             </label>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {amenitiesList.map((item) => {
                 const active = selectedAmenities.includes(item);
 
@@ -194,7 +194,7 @@ const AddRoom = () => {
                     type="button"
                     key={item}
                     onClick={() => toggleAmenity(item)}
-                    className={`border rounded-xl px-5 py-4 flex items-center justify-between transition-all duration-200 ${
+                    className={`border rounded-xl px-5 py-2 flex items-center justify-between transition-all duration-200 ${
                       active
                         ? "bg-[#e9e7ff] text-violet-700 border-violet-400"
                         : "bg-[#232323] text-gray-300 border-gray-700 hover:border-gray-500"
