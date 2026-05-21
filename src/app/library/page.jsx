@@ -53,7 +53,7 @@ const LibraryPage = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 ">
       
-      <div className="py-5 sticky top-16 z-50 bg-white">
+      <div className="py-5 ">
         <h1 className="text-5xl font-bold text-indigo-900 mb-6">
           Browse study rooms
         </h1>
@@ -76,7 +76,7 @@ const LibraryPage = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <div className="hidden sm:flex flex-col lg:col-span-3  sticky top-59 z-49 bg-zinc-900 text-white mb-10 p-6 rounded-2xl h-fit">
+        <div className="hidden sm:flex flex-col lg:col-span-3   bg-zinc-900 text-white mb-10 p-6 rounded-2xl h-fit">
           <div>
             <h2 className="text-2xl font-semibold mb-4">Amenities</h2>
 
@@ -152,7 +152,7 @@ const LibraryPage = () => {
 
         
         <div className="lg:col-span-9 mb-10">
-          <div className="flex flex-col sticky top-58 z-49 bg-white md:flex-row md:items-center md:justify-between gap-5 pb-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 pb-4">
             <h2 className="text-2xl font-semibold">
               Showing {filteredRooms.length} rooms
             </h2>

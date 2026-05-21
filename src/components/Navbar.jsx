@@ -92,24 +92,27 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end gap-5">
-          <motion.button
+          {/* <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="p-2 hidden sm:flex hover:bg-white/50 rounded-full transition-colors"
           >
             <IoSearch className="text-xl md:text-2xl text-sun-dark" />
-          </motion.button>
+          </motion.button> */}
 
           <div className="flex items-center gap-1 md:gap-2">
             {user ? (
               <>
-                <Avatar
+                <Link href={'/profile'}>
+                  <Avatar
                   src={user?.image}
                   name={user?.name}
                   // referrerPolicy="no-referrer"
                   referrerPolicy="no-referrer"
-                  size="sm"
+
+                  size="md"
                 />
+                </Link>
 
                 <Button
                   size="sm"
@@ -120,7 +123,8 @@ const Navbar = () => {
                 </Button>
               </>
             ) : (
-              <Link href="/login">
+              <div className="flex gap-">
+                <Link href="/login">
                 <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
                   <Button
                     size="sm"
@@ -130,6 +134,19 @@ const Navbar = () => {
                   </Button>
                 </motion.div>
               </Link>
+
+              <Link href="/register">
+                <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
+                  <Button
+                    size="sm"
+                    className="rounded-md bg-zinc-700 text-sun-dark font-bold px-3 md:px-6 shadow-md min-w-0"
+                  >
+                    Register
+                  </Button>
+                </motion.div>
+              </Link>
+              </div>
+
             )}
           </div>
         </div>
