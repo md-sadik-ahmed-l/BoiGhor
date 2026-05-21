@@ -27,8 +27,7 @@ const Navbar = () => {
     { href: "/library", label: "Library" },
 
     ...(user ? [{ href: "/my-bookings", label: "My Bookings" }] : []),
-
-    { href: "/add-room", label: "Add Room" },
+    ...(user ? [{ href: "/add-room", label: "Add Room" }] : []),
     ...(user ? [{ href: "/my-listings", label: "My Listings" }] : []),
   ];
 
