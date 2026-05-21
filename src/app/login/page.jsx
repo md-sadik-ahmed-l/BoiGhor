@@ -15,6 +15,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 const SignInPage = () => {
   const onSubmit = async (e) => {
@@ -28,7 +29,9 @@ const SignInPage = () => {
     });
     // console.log(data);
     if (data) {
-      (redirect("/"), toast.success("Sign Up successful"));
+      (redirect("/"), toast.success("Sign in successful"));
+    }else{
+      toast.warning("Please enter a valid information")
     }
   };
 
@@ -87,7 +90,7 @@ const SignInPage = () => {
             <FieldError />
           </TextField>
           <div className="flex justify-center items-center gap-2">
-            <Button type="submit" className='w-full bg-cyan-500'>
+            <Button type="submit" className='w-full bg-zinc-700'>
               <Check />
               Login
             </Button>
@@ -107,7 +110,7 @@ const SignInPage = () => {
             <h1>Don'n have an account?</h1>
             <Link
               href={"/register"}
-              className="text-xl font-medium text-cyan-500 hover:bg-cyan-100 hover:rounded-md"
+              className="text-xl font-medium text-zinc-700 hover:bg-cyan-100 hover:rounded-md"
             >
               {" "}
               Sign Up

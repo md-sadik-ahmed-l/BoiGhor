@@ -19,6 +19,7 @@ const amenitiesList = [
 ];
 
 import React from 'react';
+import { toast } from "react-toastify";
 
 
 const AddRoom = () => {
@@ -37,6 +38,7 @@ const AddRoom = () => {
         roomsData.user= user?.data?.session.userId;
 
         const {data:tokenData}= await authClient.token()
+        
 
         const res= await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`, {
             method:"POST",
@@ -51,6 +53,8 @@ const AddRoom = () => {
 
         if (data.insertedId) {
           router.push("/library");
+
+          toast.success("Created Room success fully")
         }
         
 
@@ -218,7 +222,7 @@ const AddRoom = () => {
           
           <button
             type="submit"
-            className="mt-2 bg-[#232323] hover:bg-[#2a2a2a] border border-gray-700 rounded-xl px-6 py-3 text-lg font-medium transition-all"
+            className="mt-2 bg-[#2b2929] hover:bg-[#4d4a4a] border border-gray-500 rounded-xl px-6 py-3 text-lg font-medium transition-all "
           >
             + Add room
           </button>

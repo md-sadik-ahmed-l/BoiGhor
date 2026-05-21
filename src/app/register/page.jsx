@@ -17,33 +17,35 @@ import { toast } from "react-toastify";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
-const SignInPage = () => {
-
+const SignUpPage = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
     const { data, error } = await authClient.signUp.email({
-
       name: user.name, // required
-      email: user.email , // required
+      email: user.email, // required
       password: user.password,
       image: user.image,
-    //   callbackURL: "/",
+      //   callbackURL: "/",
     });
     // console.log(data)
-    if(data){
-        redirect('/'),
-        toast.success('Sign Up successful')
+    if (error) {
+      toast.warning(error.message || "This user already exists");
+      return;
     }
 
+    if (data) {
+      toast.success("Sign Up successful");
+
+    }
   };
 
   const handleSignIn = async () => {
     await authClient.signIn.social({
-    provider: "google",
-  });
-};
+      provider: "google",
+    });
+  };
 
   return (
     <div className="max-w-xl mx-auto my-15">
@@ -106,28 +108,42 @@ const SignInPage = () => {
             <FieldError />
           </TextField>
           <div className="flex items-center justify-center gap-2">
-            <Button className='bg-cyan-500' type="submit">
+            <Button className="bg-zinc-700" type="submit">
               <Check />
               Submit
             </Button>
-            <Button className='text-cyan-500' type="reset" variant="secondary">
+            <Button className="text-zinc-700" type="reset" variant="secondary">
               Reset
             </Button>
           </div>
         </Form>
         <div className=" space-y-3 flex w-96 flex-col  mx-auto">
-            <h1 className="flex justify-center items-center mt-2">Or</h1>
-            <div>
-                <Button onClick={handleSignIn} variant="outline" className='w-full py-6'><FcGoogle />Sign in with Google</Button>
-            </div>
-            <div className="flex gap-1 justify-center items-center ">
-                <h1>Already have an account?<Link href={'/login'} className="text-xl font-medium text-cyan-500 hover:bg-cyan-100 hover:rounded-md">Login</Link></h1>
-                
-            </div>
+          <h1 className="flex justify-center items-center mt-2">Or</h1>
+          <div>
+            <Button
+              onClick={handleSignIn}
+              variant="outline"
+              className="w-full py-6"
+            >
+              <FcGoogle />
+              Sign in with Google
+            </Button>
+          </div>
+          <div className="flex gap-1 justify-center items-center ">
+            <h1>
+              Already have an account?
+              <Link
+                href={"/login"}
+                className="text-xl font-medium text-zinc-700 hover:bg-cyan-100 hover:rounded-md"
+              >
+                Login
+              </Link>
+            </h1>
+          </div>
         </div>
       </Card>
     </div>
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

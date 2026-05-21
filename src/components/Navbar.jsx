@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Avatar, Button } from "@heroui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
-  const pathname = usePathname(); 
+  const pathname = usePathname();
   const router = useRouter();
 
   const { data: session } = authClient.useSession();
@@ -17,15 +17,17 @@ const Navbar = () => {
 
   const handleSignOut = async () => {
     await authClient.signOut();
-    router.push("/login"); 
+    router.push("/login");
   };
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/library", label: "Library" },
-    { href: "/my-bookings", label: "My Bookings" },
+
+    ...(user ? [{ href: "/my-bookings", label: "My Bookings" }] : []),
+
     { href: "/add-room", label: "Add Room" },
-    { href: "/my-listings", label: "My Listings" },
+    ...(user ? [{ href: "/my-listings", label: "My Listings" }] : []),
   ];
 
   const links = (
@@ -34,7 +36,9 @@ const Navbar = () => {
         <li key={href}>
           <Link
             href={href}
-            className={pathname === href ? "bg-[#244D3F] text-white p-2 rounded-md" : ""}
+            className={
+              pathname === href ? "bg-[#244D3F] text-white p-2 rounded-md" : ""
+            }
           >
             {label}
           </Link>
@@ -65,7 +69,7 @@ const Navbar = () => {
               </svg>
             </div>
             <ul
-              tabIndex={0} 
+              tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {links}
@@ -76,7 +80,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="flex justify-center text-cyan-500 text-2xl sm:text-4xl font-bold">
+        <div className="flex justify-center text-zinc-700 text-2xl sm:text-4xl font-bold">
           <h4>BoiGhor</h4>
         </div>
 
@@ -92,14 +96,13 @@ const Navbar = () => {
           <div className="flex items-center gap-1 md:gap-2">
             {user ? (
               <>
-                
                 <Avatar
                   src={user?.image ?? ""}
                   name={user?.name}
                   referrerPolicy="no-referrer"
                   size="sm"
                 />
-               
+
                 <Button
                   size="sm"
                   onClick={handleSignOut}
@@ -113,7 +116,7 @@ const Navbar = () => {
                 <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
                   <Button
                     size="sm"
-                    className="rounded-md bg-cyan-500 text-sun-dark font-bold px-3 md:px-6 shadow-md min-w-0"
+                    className="rounded-md bg-zinc-700 text-sun-dark font-bold px-3 md:px-6 shadow-md min-w-0"
                   >
                     Login
                   </Button>

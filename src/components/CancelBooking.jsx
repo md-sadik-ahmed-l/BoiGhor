@@ -7,41 +7,48 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 // import { revalidatePath } from "next/cache";
 
-export function DeleteRoom({ roomDetails }) {
+export function CancelBooking({ myBooking }) {
+
+    const { _id, user, roomName, status } = myBooking;
+
+
+    const updatedBooking ={
+        status: "Canceled",
+    }
+
   const router = useRouter();
-  const { _id, user, roomName } = roomDetails;
-  console.log(user);
+  
+
+  
+//   console.log(user)
   const handleDelete = async () => {
 
-    const {data:tokenData}= await authClient.token();
-
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${_id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "contain-type": "application/json",
-
-          authorization: `Bearer ${tokenData?.token}`,
-        },
+    const {data:tokenData}= await authClient.token()
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings/${_id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        
+        authorization: `Bearer ${tokenData?.token}`
       },
-    );
+      body: JSON.stringify(updatedBooking),
+    });
 
     const data = await res.json();
 
-    if (data.deletedCount > 0) {
-      router.push("/library");
-      toast.success("Room deleted successfully");
+    if (data.modifiedCount  > 0) {
+     router.push("/my-bookings");
+     toast.success("Room canceled successfully")
     }
     return data;
   };
 
   return (
     <AlertDialog>
-      <AlertDialog.Trigger className="group flex items-center  border  rounded-md shadow-xs select-none hover:bg-surface-secondary">
+      <AlertDialog.Trigger className="group flex items-center  rounded-md shadow-xs select-none hover:bg-surface-secondary">
         <div className="flex  px-8 py-3 shrink-0 items-center justify-center  bg-danger-soft text-danger-soft-foreground hover:bg-red-500 hover:text-white rounded-md">
           <TrashBin className="size-6" />
-          <p className="text-xl font-semibold pt-2">Delete</p>
+          <p className="text-xl font-semibold pt-2">Cancel</p>
         </div>
       </AlertDialog.Trigger>
       <AlertDialog.Backdrop>
@@ -52,17 +59,17 @@ export function DeleteRoom({ roomDetails }) {
               <AlertDialog.Icon status="danger">
                 <TrashBin className="size-5" />
               </AlertDialog.Icon>
-              <AlertDialog.Heading>Delete this item?</AlertDialog.Heading>
+              <AlertDialog.Heading>Cancel this item?</AlertDialog.Heading>
             </AlertDialog.Header>
             <AlertDialog.Body>
-              <p>{roomName} is permanent deleted?</p>
+              <p>{roomName} is permanent Canceled?</p>
             </AlertDialog.Body>
             <AlertDialog.Footer>
               <Button slot="close" variant="tertiary">
                 Cancel
               </Button>
               <Button onClick={handleDelete} slot="close" variant="danger">
-                Confirm Delete
+                Confirm Canceled
               </Button>
             </AlertDialog.Footer>
           </AlertDialog.Dialog>

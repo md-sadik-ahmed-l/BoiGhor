@@ -16,6 +16,7 @@ import {
   useOverlayState,
 } from "@heroui/react";
 import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 const amenitiesList = [
   "Wi-Fi",
@@ -68,15 +69,24 @@ export function EditModal({ roomDetails }) {
       amenities: selectedAmenities,
     };
 
-    console.log(updatedRoom);
+    // console.log(updatedRoom);
+
+    
+    
 
     try {
+
+     const {data:tokenData}= await authClient.token()
+
+     
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${_id}`,
         {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
+            
+            authorization: `Bearer ${tokenData?.token}`
           },
           body: JSON.stringify(updatedRoom),
         }

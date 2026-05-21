@@ -7,41 +7,39 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 // import { revalidatePath } from "next/cache";
 
-export function DeleteRoom({ roomDetails }) {
+export function MyBookingDelete({ myBooking }) {
+
+    
   const router = useRouter();
-  const { _id, user, roomName } = roomDetails;
-  console.log(user);
+  const { _id, user, roomName } = myBooking;
+//   console.log(user)
   const handleDelete = async () => {
 
-    const {data:tokenData}= await authClient.token();
+    const {data:tokenData}= await authClient.token()
 
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${_id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "contain-type": "application/json",
-
-          authorization: `Bearer ${tokenData?.token}`,
-        },
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-booking/${_id}`, {
+      method: "DELETE",
+      headers: {
+        "contain-type": "application/json",
+         authorization: `Bearer ${tokenData?.token}`
       },
-    );
+    });
 
     const data = await res.json();
 
     if (data.deletedCount > 0) {
-      router.push("/library");
-      toast.success("Room deleted successfully");
+     router.push("/my-bookings");
+     toast.success("History deleted successfully")
     }
     return data;
   };
 
   return (
     <AlertDialog>
-      <AlertDialog.Trigger className="group flex items-center  border  rounded-md shadow-xs select-none hover:bg-surface-secondary">
-        <div className="flex  px-8 py-3 shrink-0 items-center justify-center  bg-danger-soft text-danger-soft-foreground hover:bg-red-500 hover:text-white rounded-md">
-          <TrashBin className="size-6" />
-          <p className="text-xl font-semibold pt-2">Delete</p>
+      <AlertDialog.Trigger className="group flex items-center  border  rounded-full shadow-xs select-none hover:bg-surface-secondary">
+        <div className="flex  px-8 py-2 rounded-full shrink-0 items-center justify-center hover:bg-[#494949] hover:text-white ">
+          
+          <p className="text-xl font-semibold pt-2">History deleted</p>
         </div>
       </AlertDialog.Trigger>
       <AlertDialog.Backdrop>

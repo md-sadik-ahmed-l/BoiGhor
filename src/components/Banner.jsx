@@ -48,7 +48,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       
       <section className="relative overflow-hidden bg-white dark:bg-black pt-20 pb-32 border-b border-zinc-200 dark:border-zinc-800">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center opacity-[0.03] dark:opacity-[0.05]" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1497366811353-6870744d04b2')] bg-cover bg-center opacity-[0.1] dark:opacity-[0.05]" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -215,7 +215,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-zinc-900 dark:bg-zinc-950 border-t border-zinc-800">
+      <section className="py-24 bg-zinc-800 dark:bg-zinc-950 border-t border-zinc-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-extrabold text-white sm:text-4xl mb-6">
             Ready to boost your productivity?
