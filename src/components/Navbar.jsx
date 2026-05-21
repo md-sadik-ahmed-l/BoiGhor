@@ -15,6 +15,8 @@ const Navbar = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
+  console.log(user)
+
   const handleSignOut = async () => {
     await authClient.signOut();
     router.push("/login");
@@ -47,8 +49,13 @@ const Navbar = () => {
     </>
   );
 
+
+    // console.log(user)
+
   return (
+
     <div className="sticky top-0 z-50 px-2  bg-white">
+      
       <div className="navbar container mx-auto space-x-2">
         <div className="navbar-start">
           <div className="dropdown">
@@ -97,8 +104,9 @@ const Navbar = () => {
             {user ? (
               <>
                 <Avatar
-                  src={user?.image ?? ""}
+                  src={user?.image}
                   name={user?.name}
+                  // referrerPolicy="no-referrer"
                   referrerPolicy="no-referrer"
                   size="sm"
                 />

@@ -23,8 +23,8 @@ const SignUpPage = () => {
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
     const { data, error } = await authClient.signUp.email({
-      name: user.name, // required
-      email: user.email, // required
+      name: user.name, 
+      email: user.email, 
       password: user.password,
       image: user.image,
       //   callbackURL: "/",

@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import React from "react";
 import { MdCalendarMonth } from "react-icons/md";
 import { HiSparkles } from "react-icons/hi2";
+import Link from "next/link";
 
 export const metadata = {
   title: "BoiGhor || Bookings",
@@ -85,13 +86,11 @@ const MyBookingsPage = async () => {
               You haven't booked any rooms. Browse available rooms and make your
               first reservation.
             </p>
-            <a
-              href="/rooms"
+            <Link href="/library"
               className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-black text-sm font-bold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-amber-400/20 hover:shadow-amber-400/40 tracking-wide uppercase"
             >
-              <HiSparkles />
-              Browse Rooms
-            </a>
+              
+              Browse Rooms</Link>
           </div>
         )}
       </div>
