@@ -13,48 +13,57 @@ import {
 } from "@heroui/react";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
 const SignInPage = () => {
+  const router = useRouter();
+
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
+
     const { data, error } = await authClient.signIn.email({
       email: user.email,
       password: user.password,
-      //   callbackURL: "/",
     });
-    // console.log(data);
+
     if (data) {
-      (redirect("/"), toast.success("Sign in successful"));
-    }else{
-      toast.warning("Please enter a valid information")
+      toast.success("Sign in successful");
+      router.push("/");
+    } else {
+      toast.warning(error?.message || "Please enter valid information");
     }
   };
 
   const handleSignIn = async () => {
-      await authClient.signIn.social({
+    await authClient.signIn.social({
       provider: "google",
     });
   };
 
   return (
-    <div className="max-w-xl mx-auto my-15">
-      <Card className="bg-base-200 ">
-        <h1 className="flex justify-center text-3xl font-bold my-5">Login</h1>
+    <div className="px-4 py-10 sm:py-16">
+      <Card className="w-full max-w-xl mx-auto bg-base-200 p-5 sm:p-8">
+        <h1 className="text-center text-2xl sm:text-3xl font-bold mb-6">
+          Login
+        </h1>
+
         <Form
           onSubmit={onSubmit}
-          className="flex w-96 flex-col gap-4  mx-auto space-y-4"
+          className="w-full flex flex-col gap-4"
         >
           <TextField
             isRequired
             name="email"
             type="email"
             validate={(value) => {
-              if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+              if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
+              ) {
                 return "Please enter a valid email address";
               }
               return null;
@@ -64,6 +73,7 @@ const SignInPage = () => {
             <Input placeholder="john@example.com" />
             <FieldError />
           </TextField>
+
           <TextField
             isRequired
             minLength={8}
@@ -83,36 +93,44 @@ const SignInPage = () => {
             }}
           >
             <Label>Password</Label>
+
             <Input placeholder="Enter your password" />
+
             <Description>
               Must be at least 8 characters with 1 uppercase and 1 number
             </Description>
+
             <FieldError />
           </TextField>
-          <div className="flex justify-center items-center gap-2">
-            <Button type="submit" className='w-full bg-zinc-700'>
-              <Check />
-              Login
-            </Button>
-            
-          </div>
-        </Form>
-        <div className="space-y-3 flex w-96 flex-col  mx-auto">
 
-          <h1 className="flex justify-center items-center mt-2">Or</h1>
-          <div>
-            <Button onClick={handleSignIn} variant="outline" className="w-full py-6">
-              <FcGoogle />
-              Sign in with Google
-            </Button>
-          </div>
-          <div className="flex gap-1 justify-center items-center ">
-            <h1>Don'n have an account?</h1>
+          <Button
+            type="submit"
+            className="w-full bg-zinc-700 text-white py-6"
+          >
+            <Check />
+            Login
+          </Button>
+        </Form>
+
+        <div className="w-full mt-5 space-y-4">
+          <h1 className="text-center">Or</h1>
+
+          <Button
+            onClick={handleSignIn}
+            variant="outline"
+            className="w-full py-6 "
+          >
+            <FcGoogle size={22} />
+            Sign in with Google
+          </Button>
+
+          <div className="flex flex-wrap justify-center items-center gap-1 text-sm sm:text-base">
+            <h1>Don't have an account?</h1>
+
             <Link
-              href={"/register"}
-              className="text-xl font-medium text-zinc-700 hover:bg-cyan-100 hover:rounded-md"
+              href="/register"
+              className="font-medium text-zinc-700 hover:text-cyan-600 transition"
             >
-              {" "}
               Sign Up
             </Link>
           </div>
@@ -123,5 +141,3 @@ const SignInPage = () => {
 };
 
 export default SignInPage;
-
-
