@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -29,7 +27,6 @@ const LibraryPage = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
-  
   const fetchRooms = async () => {
     try {
       const params = new URLSearchParams();
@@ -73,7 +70,6 @@ const LibraryPage = () => {
     }
   };
 
-  
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       fetchRooms();
@@ -89,14 +85,12 @@ const LibraryPage = () => {
     maxPrice,
   ]);
 
-  
   const handleAmenityChange = (item) => {
     setSelectedAmenities((prev) =>
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item],
     );
   };
 
- 
   const handleFloorChange = (floor) => {
     setSelectedFloors((prev) =>
       prev.includes(floor) ? prev.filter((i) => i !== floor) : [...prev, floor],
@@ -105,7 +99,6 @@ const LibraryPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4">
-      
       <div className="py-5">
         <h1 className="text-5xl font-bold text-indigo-900 mb-6">
           Browse study rooms
@@ -119,16 +112,11 @@ const LibraryPage = () => {
             onChange={(e) => setSearchText(e.target.value)}
             className="w-full md:w-[500px] bg-zinc-900 text-white px-5 py-4 rounded-xl outline-none border border-zinc-800"
           />
-
-          
         </div>
       </div>
 
-      
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-       
         <div className=" sm:flex flex-col lg:col-span-3 bg-zinc-900 text-white mb-10 p-6 rounded-2xl h-fit">
-          
           <div>
             <h2 className="text-2xl font-semibold mb-4">Amenities</h2>
 
@@ -153,7 +141,6 @@ const LibraryPage = () => {
 
           <div className="border-t border-zinc-700 my-4"></div>
 
-          
           <div>
             <h2 className="text-2xl font-semibold mb-4">Hourly rate ($)</h2>
 
@@ -201,7 +188,6 @@ const LibraryPage = () => {
             </div>
           </div>
 
-          
           {/* <button
             onClick={fetchRooms}
             className="w-full mt-6 border border-zinc-600 rounded-xl py-4 hover:bg-zinc-800 transition"
@@ -210,7 +196,6 @@ const LibraryPage = () => {
           </button> */}
         </div>
 
-        
         <div className="lg:col-span-9 mb-10">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 pb-4">
             <h2 className="text-2xl font-semibold">
@@ -230,11 +215,19 @@ const LibraryPage = () => {
             </select>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 sm:gap-6 gap-4">
-            {roomsData.map((roomData) => (
-              <LibraryCard key={roomData._id} roomData={roomData} />
-            ))}
-          </div>
+          {roomsData.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 sm:gap-6 gap-4">
+              {roomsData.map((roomData) => (
+                <LibraryCard key={roomData._id} roomData={roomData} />
+              ))}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center py-20">
+              <h2 className="text-2xl font-semibold text-zinc-500">
+                No rooms found
+              </h2>
+            </div>
+          )}
         </div>
       </div>
     </div>
