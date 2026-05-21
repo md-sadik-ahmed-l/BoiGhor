@@ -14,10 +14,13 @@ import {
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const SignUpPage = () => {
+
+  const router = useRouter();
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -37,7 +40,7 @@ const SignUpPage = () => {
 
     if (data) {
       toast.success("Sign Up successful");
-
+      router.push("/")
     }
   };
 
