@@ -106,6 +106,7 @@ const Navbar = () => {
                 <Link href={'/profile'}>
                   <Avatar
                   src={user?.image}
+                  
                   name={user?.name}
                   // referrerPolicy="no-referrer"
                   referrerPolicy="no-referrer"
@@ -123,7 +124,7 @@ const Navbar = () => {
                 </Button>
               </>
             ) : (
-              <div className="flex gap-">
+              <div className="flex gap-3 sm:gap-5">
                 <Link href="/login">
                 <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
                   <Button

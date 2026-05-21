@@ -10,6 +10,7 @@ const nextConfig = {
         protocol: 'http',
         hostname: '**', // Allows all HTTP domains (optional, but good for total coverage)
       },
+      
     ],
   },
 };

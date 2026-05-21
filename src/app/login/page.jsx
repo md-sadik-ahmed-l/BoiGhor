@@ -43,6 +43,11 @@ const SignInPage = () => {
     await authClient.signIn.social({
       provider: "google",
     });
+
+    if (data) {
+      toast.success("Register success full");
+    }
+    router.push("/");
   };
 
   return (
@@ -52,18 +57,13 @@ const SignInPage = () => {
           Login
         </h1>
 
-        <Form
-          onSubmit={onSubmit}
-          className="w-full flex flex-col gap-4"
-        >
+        <Form onSubmit={onSubmit} className="w-full flex flex-col gap-4">
           <TextField
             isRequired
             name="email"
             type="email"
             validate={(value) => {
-              if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
-              ) {
+              if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
                 return "Please enter a valid email address";
               }
               return null;
@@ -103,10 +103,7 @@ const SignInPage = () => {
             <FieldError />
           </TextField>
 
-          <Button
-            type="submit"
-            className="w-full bg-zinc-700 text-white py-6"
-          >
+          <Button type="submit" className="w-full bg-zinc-700 text-white py-6">
             <Check />
             Login
           </Button>

@@ -43,7 +43,8 @@ const SignUpPage = () => {
 
     if (data) {
       toast.success("Sign Up successful");
-      router.push("/");
+      await authClient.signOut();
+      router.push("/login");
     }
   };
 
@@ -51,6 +52,10 @@ const SignUpPage = () => {
     await authClient.signIn.social({
       provider: "google",
     });
+    if(data){
+      toast.success("Register success full")
+    }
+    router.push("/")
   };
 
   return (
