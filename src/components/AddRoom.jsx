@@ -52,7 +52,7 @@ const AddRoom = () => {
         const data = await res.json()
 
         if (data.insertedId) {
-          router.push("/library");
+          router.push("/my-listings");
 
           toast.success("Created Room success fully")
         }

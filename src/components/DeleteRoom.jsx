@@ -30,7 +30,7 @@ export function DeleteRoom({ roomDetails }) {
     const data = await res.json();
 
     if (data.deletedCount > 0) {
-      router.push("/library");
+      router.push("/my-listings");
       toast.success("Room deleted successfully");
     }
     return data;
