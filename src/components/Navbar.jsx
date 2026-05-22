@@ -1,5 +1,5 @@
 "use client";
-import { Avatar, Button } from "@heroui/react";
+import { Avatar, Button, Dropdown, Label } from "@heroui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -15,7 +15,7 @@ const Navbar = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  console.log(user)
+  console.log(user);
 
   const handleSignOut = async () => {
     await authClient.signOut();
@@ -48,13 +48,10 @@ const Navbar = () => {
     </>
   );
 
-
-    // console.log(user)
+  // console.log(user)
 
   return (
-
     <div className="sticky top-0 z-50 px-2  bg-white">
-      
       <div className="navbar container mx-auto space-x-2">
         <div className="navbar-start">
           <div className="dropdown">
@@ -91,62 +88,82 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end gap-5">
-          {/* <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="p-2 hidden sm:flex hover:bg-white/50 rounded-full transition-colors"
-          >
-            <IoSearch className="text-xl md:text-2xl text-sun-dark" />
-          </motion.button> */}
+          
 
           <div className="flex items-center gap-1 md:gap-2">
             {user ? (
               <>
-                <Link href={'/profile'}>
-                  <Avatar
+                <Avatar
+                  className="hidden sm:flex"
                   src={user?.image}
-                  
                   name={user?.name}
                   // referrerPolicy="no-referrer"
                   referrerPolicy="no-referrer"
-
                   size="md"
                 />
-                </Link>
+                <Dropdown>
+                  <Button aria-label="Menu" variant="secondary">
+                    {user?.name}
+                  </Button>
+                  <Dropdown.Popover>
+                    <Dropdown.Menu
+                      onAction={(key) => console.log(`Selected: ${key}`)}
+                    >
+                      <Dropdown.Item id="new-file" textValue="New file">
+                        <Link href={"/profile"}  >
+                          
+                          <Label>Profile</Label>
+                        </Link>
+                      </Dropdown.Item>
+                      <Dropdown.Item id="copy-link" textValue="Copy link">
+                        <Link href={"/my-bookings"}>
+                          <Label>My Bookings</Label>
+                        </Link>
+                      </Dropdown.Item>
+                      <Dropdown.Item id="edit-file" textValue="Edit file">
+                        <Link href={"/my-listings"}>
+                          <Label>My Listings</Label>
+                        </Link>
+                      </Dropdown.Item>
+                      <Dropdown.Item id="delete-file" variant="danger">
+                        <Button
+                          size="sm"
+                          onClick={handleSignOut}
+                          className="rounded-md bg-red-500 text-white font-bold px-3 md:px-6"
+                        >
+                          <Label>Sign Out</Label>
+                        </Button>
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown.Popover>
+                </Dropdown>
 
-                <Button
-                  size="sm"
-                  onClick={handleSignOut}
-                  className="rounded-md bg-red-500 text-white font-bold px-3 md:px-6"
-                >
-                  Sign Out
-                </Button>
+                
               </>
             ) : (
               <div className="flex gap-3 sm:gap-5">
                 <Link href="/login">
-                <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
-                  <Button
-                    size="sm"
-                    className="rounded-md bg-zinc-700 text-sun-dark font-bold px-3 md:px-6 shadow-md min-w-0"
-                  >
-                    Login
-                  </Button>
-                </motion.div>
-              </Link>
+                  <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
+                    <Button
+                      size="sm"
+                      className="rounded-md bg-zinc-700 text-sun-dark font-bold px-3 md:px-6 shadow-md min-w-0"
+                    >
+                      Login
+                    </Button>
+                  </motion.div>
+                </Link>
 
-              <Link href="/register">
-                <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
-                  <Button
-                    size="sm"
-                    className="rounded-md bg-zinc-700 text-sun-dark font-bold px-3 md:px-6 shadow-md min-w-0"
-                  >
-                    Register
-                  </Button>
-                </motion.div>
-              </Link>
+                <Link href="/register">
+                  <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
+                    <Button
+                      size="sm"
+                      className="rounded-md bg-zinc-700 text-sun-dark font-bold px-3 md:px-6 shadow-md min-w-0"
+                    >
+                      Register
+                    </Button>
+                  </motion.div>
+                </Link>
               </div>
-
             )}
           </div>
         </div>
@@ -156,3 +173,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
