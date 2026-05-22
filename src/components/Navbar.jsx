@@ -103,7 +103,7 @@ const Navbar = () => {
                 />
                 <Dropdown>
                   <Button aria-label="Menu" variant="secondary">
-                    {user?.name}
+                    {user?.name?.split(" ").slice(0, 2).join(" ")}
                   </Button>
                   <Dropdown.Popover>
                     <Dropdown.Menu
