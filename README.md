@@ -1,6 +1,10 @@
 # BoiGhor – Library Study Room Booking
 
-## Live Site: 
+### Live Site: https://boi-ghor-five.vercel.app
+
+### Client site repository: https://github.com/md-sadik-ahmed-l/BoiGhor
+
+### Server site repository: https://github.com/md-sadik-ahmed-l/BoiGhor-Server
 
 StudyNook is a full-stack web application where students and library users can browse, book, and manage study rooms easily. Users can list their own study rooms, manage bookings, and prevent double-booking through smart time conflict detection.
 
