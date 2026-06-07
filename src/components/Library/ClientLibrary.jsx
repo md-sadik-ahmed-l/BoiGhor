@@ -22,6 +22,7 @@ const ClientLibrary = () => {
     const [roomsData, setRoomsData] = useState([]);
 
   const [searchText, setSearchText] = useState("");
+  
   const [sortOption, setSortOption] = useState("latest");
 
   const [selectedAmenities, setSelectedAmenities] = useState([]);
@@ -169,7 +170,7 @@ const ClientLibrary = () => {
 
           <div className="border-t border-zinc-700 my-6"></div>
 
-          {/* floor */}
+          
           <div>
             <h2 className="text-2xl font-semibold mb-4">Floor</h2>
 

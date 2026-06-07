@@ -78,6 +78,7 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
+          
           <div className="navbar-center hidden md:flex">
             <ul className="flex gap-2 lg:gap-10">{links}</ul>
           </div>
